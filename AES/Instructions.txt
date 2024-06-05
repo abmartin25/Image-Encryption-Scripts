@@ -1,0 +1,61 @@
+EncryptAES.py: 
+This Python script encrypts an image file using AES (Advanced Encryption Standard) encryption. The script uses the following key steps to securely encrypt the image:
+
+    Load the Image: The image is loaded from the specified input path using the PIL library.
+
+    Generate Initialization Vector (IV): A random IV is generated using the AES block size. This IV is crucial for ensuring the security of the encryption process.
+
+    Generate a Key-Specific IV: The script computes a unique IV by combining the base image filename with a key-specific value, using HMAC (Hash-based Message Authentication Code) and SHA256 for hashing.
+
+    Convert Image to Bytes: The image is converted into a byte array to prepare it for encryption.
+
+    Encrypt the Image Data: The AES cipher is initialized in CBC (Cipher Block Chaining) mode using the unique IV. The image data is padded and then encrypted.
+
+    Save Encrypted Data: The encrypted data (including the IV) is written to the specified output path.
+
+    Save IV Separately: The unique IV is saved to a separate file with a name related to the input image filename, ensuring it can be used later for decryption.
+
+    Command Line Arguments: The script takes three command line arguments - the input image path, the output image path, and the encryption key. These are parsed using the argparse library.
+
+Usage
+
+To run the script from the command line:
+
+python encrypt_script.py original.jpg encrypted_image.jpg UZ4i59vPgLRT16s8FZ4i81vPgLRT16qk
+
+    original.jpg: Path to the input image.
+    encrypted_image.jpg: Path to save the encrypted image.
+    UZ4i59vPgLRT16s8FZ4i81vPgLRT16qk: Encryption key (must be a valid string).
+
+The script outputs the encrypted image and saves the IV to a separate file, ensuring that the image can be decrypted later.
+
+
+decryptAES.py:
+This Python script decrypts an encrypted image file using AES (Advanced Encryption Standard) encryption. The script follows these key steps to securely decrypt the image:
+
+    Load the IV: The script reads the unique IV (Initialization Vector) from the specified IV file. This IV is essential for decrypting the data correctly.
+
+    Read Encrypted Data: The encrypted image file is read, and the IV used during encryption is extracted along with the encrypted data.
+
+    Initialize AES Cipher: The AES cipher is initialized in CBC (Cipher Block Chaining) mode using the unique IV and the provided decryption key.
+
+    Decrypt the Image Data: The encrypted data is decrypted and unpadded to retrieve the original image bytes.
+
+    Convert Bytes to Image: The decrypted image bytes are converted back into an image using the PIL library.
+
+    Save Decrypted Image: The decrypted image is saved to the specified output path.
+
+    Command Line Arguments: The script takes four command line arguments - the encrypted image path, the IV file path, the output image path, and the decryption key. These are parsed using the argparse library.
+
+Usage
+
+To run the script from the command line:
+
+python decrypt_script.py encrypted_image.jpg original.jpg.iv decrypted_image.jpg UZ4i59vPgLRT16s8FZ4i81vPgLRT16qk
+
+    encrypted_image.jpg: Path to the encrypted image file.
+    original.jpg.iv: Path to the IV file used during encryption.
+    decrypted_image.jpg: Path to save the decrypted image.
+    UZ4i59vPgLRT16s8FZ4i81vPgLRT16qk: Decryption key (must be a valid string).
+
+The script outputs the decrypted image and ensures it is correctly restored to its original form using the provided key and IV file.

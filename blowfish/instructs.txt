@@ -1,0 +1,9 @@
+Script encrypts and decrypts images using the symmetric key block cipher-Blowfish. The script encrypts and decrypts
+
+usage: blowfish.py [-h] {encrypt,decrypt} input_image_path output_image_path key
+
+Example of encrypting usage:
+python blowfish.py encrypt original.jpg encryptedblowfish.jpg klasjdfwioehq8whiwegakdjsflsadkf
+
+Example of decrypting usage:
+python blowfish.py decrypt encryptedblowfish.jpg new.jpg klasjdfwioehq8whiwegakdjsflsadkf
